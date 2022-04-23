@@ -12,6 +12,9 @@ public class MainView extends JFrame {
         welcome.setHorizontalTextPosition(JLabel.CENTER);
         add(welcome);
         setTitle("Main Window");
+
+        // Exit the application and free memory
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
 }

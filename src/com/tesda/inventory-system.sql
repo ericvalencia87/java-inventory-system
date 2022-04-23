@@ -13,11 +13,15 @@ create table users(
     PRIMARY KEY (user_id)
 );
 
+--insert the default admin
+INSERT INTO users(username,password, first_name, last_name)
+VALUES("admin", "5b424035656630346235:a877643f145245c28aa2d26ff9e610bd48c0d998dc590919a69e22ec979e9c37af70a13a76f445b7c3861a29d619dd0e39408f8b7ab216b0a36e40b3876d8e2b","admin", "admin")
+
 --Insert Dummy Data to users table
-INSERT INTO users(username, first_name, last_name)
-VALUES("egv", "eric", "valencia"),
-("kgv", "kristine", "valencia"),
-("fgv", "frederick", "valencia"),
-("agv", "ericka", "valencia")
+INSERT INTO users(username, user_type,  first_name, last_name)
+VALUES("egv",0, "eric", "valencia"),
+("kgv",0, "kristine", "valencia"),
+("fgv",0, "frederick", "valencia"),
+("agv",0, "ericka", "valencia")
 
 

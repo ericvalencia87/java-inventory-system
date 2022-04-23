@@ -17,6 +17,54 @@ public class UserDao extends Dao {
 
     }
 
+    public User getUserByUsername(String username) throws SQLException{
+
+        PreparedStatement statement = conn.prepareStatement("Select * FROM users WHERE username = ?");
+        statement.setString(1, username);
+
+        ResultSet rs = statement.executeQuery();
+
+        if(rs.next()){
+            return new User(
+                    rs.getInt("user_id"),
+                    rs.getString("username"),
+                    rs.getString("password"),
+                    rs.getBoolean("user_type"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getBoolean("status"),
+                    rs.getTimestamp("date_created"),
+                    rs.getTimestamp("date_updated")
+            );
+        }else{
+            return null;
+        }
+    }
+
+    public User getUserById(int id ) throws SQLException{
+
+        PreparedStatement statement = conn.prepareStatement("Select * FROM users WHERE user_id = ?");
+        statement.setInt(1, id);
+
+        ResultSet rs = statement.executeQuery();
+
+        if(rs.next()){
+            return new User(
+                    rs.getInt("user_id"),
+                    rs.getString("username"),
+                    rs.getString("password"),
+                    rs.getBoolean("user_type"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getBoolean("status"),
+                    rs.getTimestamp("date_created"),
+                    rs.getTimestamp("date_updated")
+            );
+        }else{
+            return null;
+        }
+    }
+
     public List<User> getAllUser() throws SQLException{
 
         List<User> users = new ArrayList<>();
@@ -42,35 +90,5 @@ public class UserDao extends Dao {
         return users;
     }
 
-    public User getUserById(int id ) throws SQLException{
 
-        PreparedStatement statement = conn.prepareStatement("Select * FROM users WHERE user_id = ?");
-        statement.setInt(1, id);
-
-        ResultSet rs = statement.executeQuery();
-
-        if(rs.next()){
-            return new User(
-                    rs.getInt("user_id"),
-                    rs.getString("username"),
-                    rs.getString("password"),
-                    rs.getBoolean("user_type"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getBoolean("status"),
-                    rs.getTimestamp("date_created"),
-                    rs.getTimestamp("date_updated")
-                    );
-        }else{
-            return null;
-        }
-    }
-
-    public void updateUser(User user) {
-
-
-    }
-    public void deleteUser(User user){
-
-    }
 }
