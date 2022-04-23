@@ -46,6 +46,8 @@ public class LoginView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+
+
                 /* Pinag iisipan ko pa ano better way. Pero temporarily, kunyare authenticated yung user, Ioopen ko yung main screen from here.
                  * Another option na kinoconsider ko is magbato ng signal sa Main Class, then si Main class ang mag open ng screen.
                  *
@@ -62,9 +64,7 @@ public class LoginView extends JFrame {
 
 
     //TODO get the credentials given by the user and use it to authenticate
-    public User authenticate(){
+    public void authenticate(){
 
-        //return the User if authenticated and null if nut
-        return new User();
     }
 }
