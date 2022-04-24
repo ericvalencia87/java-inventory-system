@@ -17,7 +17,7 @@ public class MainView extends JFrame {
     JPanel container = new JPanel();
     CardLayout card = new CardLayout();
     JPanel usersPanel = new UsersPanel();
-    JPanel productsPanel = new ProductsView();
+    JPanel productsPanel = new ProductsPanel();
 
     public MainView(){
         //Create a border

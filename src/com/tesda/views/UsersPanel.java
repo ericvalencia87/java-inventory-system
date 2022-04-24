@@ -227,7 +227,7 @@ public class UsersPanel extends JPanel implements ActionListener {
         }
 
         if(source == nextButton){
-            if(index < users.size()){
+            if(index < users.size()-1){
                 index++;
             }
             displayUser(index);

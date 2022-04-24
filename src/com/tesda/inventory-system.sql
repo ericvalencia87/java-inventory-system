@@ -24,4 +24,37 @@ VALUES("egv",0, "eric", "valencia"),
 ("fgv",0, "frederick", "valencia"),
 ("agv",0, "ericka", "valencia")
 
+--Create categories table
+
+CREATE TABLE categories(
+    category_id int AUTO_INCREMENT,
+    category_name varchar(255) UNIQUE NOT NULL,
+    PRIMARY KEY (category_id));
+
+INSERT INTO categories(category_name)
+VALUES("Office Supplies"), ("Consumables"), ("Whateve")
+
+--Create products table
+CREATE TABLE products(product_id int UNIQUE AUTO_INCREMENT,
+                      product_name varchar(255) UNIQUE NOT NULL,
+                      uom varchar(255),
+                      max_level int,
+                      min_level int,
+                      reorder_level int,
+                      location varchar(255),
+                      category_id int NOT NULL,
+                      status boolean DEFAULT true,
+                      date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                      date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                      PRIMARY KEY (product_id),
+                      FOREIGN KEY (category_id) REFERENCES categories(category_id)
+                     );
+
+INSERT INTO products(product_name, uom, max_level, min_level, reorder_level, location, category_id)
+VALUES
+("Bond Paper", "rim", 100, 1, 5, "A51",1),
+("Toilet Paper", "pc", 100, 1, 5, "A55",2),
+("Ballpen", "pc", 100, 1, 5, "A53",1),
+("Laptopr", "unit", 100, 1, 0, "A54",1)
+
 
