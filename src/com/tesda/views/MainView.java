@@ -5,23 +5,26 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.Flow;
 
 public class MainView extends JFrame {
+
+    Border blackline = BorderFactory.createLineBorder(Color.black);
+
+    JLabel title = new JLabel();
+
     JPanel mainPanel = new JPanel();
     JPanel toolsPanel = new JPanel();
     JPanel container = new JPanel();
     CardLayout card = new CardLayout();
-    JPanel usersPanel = new JPanel();
-    JPanel productsPanel = new JPanel();
+    JPanel usersPanel = new UsersPanel();
+    JPanel productsPanel = new ProductsView();
 
     public MainView(){
         //Create a border
         Font font = new Font("Arial", Font.PLAIN, 20);
-        Border blackline = BorderFactory.createLineBorder(Color.black);
+
 
         //Left Panel
-
         add(toolsPanel, BorderLayout.WEST);
         toolsPanel.setBorder(blackline);
         toolsPanel.setLayout(new GridLayout(20,1));
@@ -30,14 +33,14 @@ public class MainView extends JFrame {
         userButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                userButtonClicked();
+                loadUsersPanel();
             }
         });
         JButton productButton = new JButton("Products");
         productButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                productsButtonClicked();
+                loadProductsPanel();
             }
         });
         productButton.setFont(font);
@@ -50,12 +53,12 @@ public class MainView extends JFrame {
         add(mainPanel, BorderLayout.CENTER);
         mainPanel.setBorder(blackline);
         mainPanel.setLayout(new BorderLayout());
-        JLabel title = new JLabel("Product Inventory System", JLabel.CENTER);
         mainPanel.add(title, BorderLayout.NORTH);
         title.setVerticalTextPosition(JLabel.CENTER);
         title.setHorizontalTextPosition(JLabel.CENTER);
         title.setBorder(blackline);
         title.setFont(new Font("Arial", Font.PLAIN, 30));
+        title.setHorizontalAlignment(SwingConstants.CENTER);
 
         //Container Panel
         mainPanel.add(container, BorderLayout.CENTER);
@@ -66,22 +69,23 @@ public class MainView extends JFrame {
         container.setLayout(card);
 
         //Users Panel
-
-        JLabel usersLabel = new JLabel("Users");
-        container.add(usersLabel, "users");
+        container.add(usersPanel, "users");
 
 
         //Products Panel
-
         JLabel productsLabel = new JLabel("Producst");
-        container.add(productsLabel,"products");
-        card.show(container,"products");
+        productsLabel.setFont(new Font("Arial", Font.PLAIN, 100));
+        //container.add(productsLabel,"products");
+        container.add(productsPanel,"products");
+        loadUsersPanel();
 
 
+        setTitle("Product Inventory System");
 
-
-
-        setTitle("Main Window");
+        //Set the size before maximize
+        int Width = (int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+        int Height = (int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+        setSize(Width-500,Height-100);
 
         // Exit the application and free memory
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,11 +93,16 @@ public class MainView extends JFrame {
         setVisible(true);
     }
 
-    private void userButtonClicked(){
+    private void loadUsersPanel(){
+
+        title.setText("Users");
         card.show(container, "users");
+
     }
 
-    private void productsButtonClicked(){
+    private void loadProductsPanel(){
+
+        title.setText("Products");
         card.show(container, "products");
     }
 
